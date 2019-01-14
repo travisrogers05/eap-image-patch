@@ -26,19 +26,8 @@ oc project
 3.  Click on the "Create" button or use this CL command (replace **app-name** with a name you choose):
 
   ```
-  oc process eap71-basic-s2i -n openshift \
-  -v APPLICATION_NAME=<app-name>,SOURCE_REPOSITORY_URL=https://github.com/travisrogers05/eap-image-patch,SOURCE_REPOSITORY_REF=master,CONTEXT_DIR="" \
-  | oc create -f -
+  oc process openshift//eap71-basic-s2i APPLICATION_NAME=<app-name> SOURCE_REPOSITORY_URL=https://github.com/travisrogers05/eap-image-patch SOURCE_REPOSITORY_REF=master CONTEXT_DIR="" | oc create -f -
   ```
 
-4.  Add the following service account and roles. (replace **project-name** and **app-name** with a names you choose)
-
-  ```
-  oc project <project-name>
-  oc create serviceaccount eap-service-account -n $(oc project -q)
-  oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default -n $(oc project -q)
-  oc policy add-role-to-user view system:serviceaccount:$(oc project -q):eap-service-account -n $(oc project -q)
-  oc env dc/<app-name> -e OPENSHIFT_KUBE_PING_NAMESPACE=<project-name> OPENSHIFT_KUBE_PING_LABELS=application=<app-name>
-  ```
 
 At this point the contents of the git repository have been added into the container during the build step for the container.  The S2I assemble script for EAP will install all files under the `modules` directory into the container during the build step.  This effectively applies a patched/updated module file to the EAP installation within the container.

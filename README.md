@@ -1,4 +1,4 @@
-## Example of creating an Openshift container using s2i based on JBoss EAP and a binary (WAR) file, that also includes a patched /updated EAP module.
+## Example of creating an Openshift container using s2i based on JBoss EAP and a binary (WAR) file, that also includes a patched/updated EAP module.
 
 #### Issue these commands from CLI to ensure you are not the system:admin, unless you mean to be.  Also that you are not operating on the default project.
 ```

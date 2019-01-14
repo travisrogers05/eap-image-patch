@@ -1,4 +1,4 @@
-## Example of creating an Openshift container using s2i based on JBoss EAP and a binary (WAR) file
+## Example of creating an Openshift container using s2i based on JBoss EAP and a binary (WAR) file, that also includes a patched /updated EAP module.
 
 #### Issue these commands from CLI to ensure you are not the system:admin, unless you mean to be.  Also that you are not operating on the default project.
 ```
@@ -15,19 +15,19 @@ oc project
   oc new-project <project-name>
   ```
 
-2.  Add an application to the project.  Use the EAP 6.4 template image.  Provide the following fields for this example app:
+2.  Add an application to the project.  Use the EAP 7.1 template image.  Provide the following fields for this example app:
 
   ```
-  SOURCE_REPOSITORY_URL = https://github.com/travisrogers05/examples
+  SOURCE_REPOSITORY_URL = https://github.com/travisrogers05/eap-image-patch
   SOURCE_REPOSITORY_REF = master
-  CONTEXT_DIR = eap-cluster-demo
+  CONTEXT_DIR = ""
   ```
 
 3.  Click on the "Create" button or use this CL command (replace **app-name** with a name you choose):
 
   ```
-  oc process eap64-basic-s2i -n openshift \
-  -v APPLICATION_NAME=<app-name>,SOURCE_REPOSITORY_URL=https://github.com/travisrogers05/examples,SOURCE_REPOSITORY_REF=master,CONTEXT_DIR=eap-cluster-demo \
+  oc process eap71-basic-s2i -n openshift \
+  -v APPLICATION_NAME=<app-name>,SOURCE_REPOSITORY_URL=https://github.com/travisrogers05/eap-image-patch,SOURCE_REPOSITORY_REF=master,CONTEXT_DIR="" \
   | oc create -f -
   ```
 

@@ -41,4 +41,4 @@ oc project
   oc env dc/<app-name> -e OPENSHIFT_KUBE_PING_NAMESPACE=<project-name> OPENSHIFT_KUBE_PING_LABELS=application=<app-name>
   ```
 
-At this point the contents of the git repository have been added into the container during the build step for the container.  The S2I assemble script for EAP will install all files under the modules directory into the container during the build step.  This effectively applies a patched/updated module file to the EAP installation within the container.
+At this point the contents of the git repository have been added into the container during the build step for the container.  The S2I assemble script for EAP will install all files under the `modules` directory into the container during the build step.  This effectively applies a patched/updated module file to the EAP installation within the container.
